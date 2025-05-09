@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dressy - New Arrivals</title>
+   <style>
+    /* style.css */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.left h1 {
+    font-size: 28px;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+.left p {
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.social-icon {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon a {
+    color: #333;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.social-icon a:hover {
+    color: #888;
+}
+
+.right ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 25px;
+}
+
+.right li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+
+.right li a:hover {
+    color: #888;
+}
+
+.new-arrivals {
+    text-align: center;
+    margin-top: 40px;
+    position: relative;
+}
+
+.new-arrivals h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    margin: 0 auto 50px;
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+    gap: 30px;
+    padding: 0 50px;
+}
+
+.product-card {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    min-width: 300px;
+    flex: 0 0 auto;
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.product-image {
+    height: 300px;
+    background-color: #f0f0f0;
+    margin-bottom: 20px;
+    background-size: cover;
+    background-position: center;
+}
+
+.product-card h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.price {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.koko-price {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 10;
+    transition: background 0.3s;
+}
+
+.carousel-button:hover {
+    background: #f0f0f0;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.rewards-section {
+    margin: 50px 0;
+    padding: 30px;
+    background-color: #f0f0f0;
+}
+
+.rewards-section h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.shop-category {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.shop-category:hover {
+    background-color: #555;
+}
+
+/* Product Detail Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 100;
+    overflow-y: auto;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 50px auto;
+    padding: 30px;
+    width: 80%;
+    max-width: 900px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.product-detail {
+    display: flex;
+    gap: 40px;
+}
+
+.product-detail-image {
+    flex: 1;
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+}
+
+.product-detail-info {
+    flex: 1;
+    text-align: left;
+}
+
+.product-detail-info h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.product-detail-info .price {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.product-detail-info .description {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.size-selector {
+    margin: 20px 0;
+}
+
+.size-selector select {
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+.add-to-cart {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.add-to-cart:hover {
+    background-color: #555;
+}
+
+.additional-images {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.additional-image {
+    width: 80px;
+    height: 80px;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.additional-image:hover {
+    border-color: #333;
+}
+
+.additional-image.active {
+    border-color: #333;
+}
+
+.back-button {
+  display: inline-block;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  color: #666;
+  transform: translateX(-3px);
+}
+   </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="card">
+            <div class="left">
+                <h1>Dressy</h1>
+                <p>💍 
+Welcome to Enchanted Elegance – Where Every Little Girl Becomes a Princess.</p>
+                
+            </div>
+            <div class="right">
+                <ul>
+                    
+                   
+                    <li>
+                        <a href="index.html" class="back-button" aria-label="Back to dresses">
+                          ← Back
+                        </a>
+                      </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="new-arrivals">
+            <h2>NEW ARRIVALS</h2>
+            
+            <div class="carousel-container">
+                <button class="carousel-button prev" aria-label="Previous slide">&#10094;</button>
+                
+                <div class="carousel">
+                    <div class="product-card" data-product-id="1">
+                        <div class="product-image" style="background-image: url('https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/776/686/new_large/Snapinsta.app_361917357_1281066052769741_7542260525457797854_n_1080.jpg?1697178222')"></div>
+                        <h3>SEAM DETAILED HIGH WAIST SHORT</h3>
+                        <p class="price">LKR 13,450.00</p>
+                        <p class="koko-price">LKR 12,150.00 with offer</p>
+                    </div>
+                    
+                    <div class="product-card" data-product-id="2">
+                        <div class="product-image" style="background-image: url('https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/776/695/new_large/378195016_18381825262054431_6541196109615667217_n.jpg?1697178388')"></div>
+                        <h3>PIN TUCK DETAILED TIERED MINI DRESS</h3>
+                        <p class="price">LKR 27,450.00</p>
+                        <p class="koko-price">LKR 22,483.33 with offer</p>
+                    </div>
+                    
+                    <div class="product-card" data-product-id="3">
+                        <div class="product-image" style="background-image: url('https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/776/690/new_large/Snapinsta.app_343928323_627398675561852_8541137167038632642_n_1080.jpg?1697178162')"></div>
+                        <h3>FRILL DETAILED BIAS MAXI DRESS</h3>
+                        <p class="price">LKR 47,450.00</p>
+                        <p class="koko-price">LKR 42,483.33 with offer</p>
+                    </div>
+                    
+                    <!-- Additional product cards for demonstration -->
+                    <div class="product-card" data-product-id="4">
+                        <div class="product-image" style="background-image: url('https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/659/659/new_large/Snapinsta.app_219514692_1032455963957427_283601405880123912_n_1080.jpg?1694610305')"></div>
+                        <h3>NEW ARRIVAL 1</h3>
+                        <p class="price">LKR 15,000.00</p>
+                        <p class="koko-price">LKR 12,666.66 with offer</p>
+                    </div>
+                    
+                    <div class="product-card" data-product-id="5">
+                        <div class="product-image" style="background-image: url('https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/776/697/new_large/Snapinsta.app_371005329_324308993402979_2654081203253502701_n_1080.jpg?1697178410')"></div>
+                        <h3>NEW ARRIVAL 2</h3>
+                        <p class="price">LKR 16,000.00</p>
+                        <p class="koko-price">LKR 12,000.00 with offer</p>
+                    </div>
+                </div>
+                
+                <button class="carousel-button next" aria-label="Next slide">&#10095;</button>
+            </div>
+            
+            <div class="rewards-section">
+                <h3>OFFERS!</h3>
+                <button class="shop-category" onclick="window.location.href='colour.html'">CATEGORY</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="product-detail">
+                <div class="product-detail-image" id="detailMainImage"></div>
+                <div class="product-detail-info">
+                    <h2 id="detailTitle"></h2>
+                    <p class="price" id="detailPrice"></p>
+                    <p class="koko-price" id="detailKokoPrice"></p>
+                    <p class="description" id="detailDescription">
+                        This elegant piece is crafted from premium quality fabric for maximum comfort and durability. 
+                        The design features intricate detailing that enhances its aesthetic appeal. Perfect for both 
+                        casual and formal occasions, this item will quickly become a wardrobe favorite.
+                    </p>
+                    <div class="size-selector">
+                        <label for="size">Size:</label>
+                        <select id="size">
+                            <option value="S">Small (S)</option>
+                            <option value="M">Medium (M)</option>
+                            <option value="L">Large (L)</option>
+                            <option value="XL">Extra Large (XL)</option>
+                        </select>
+                    </div>
+                    <button class="add-to-cart">ADD TO CART</button>
+                    <div class="additional-images">
+                        <div class="additional-image active" style="background-image: url('https://via.placeholder.com/200x300/f5f5f5/cccccc?text=Front+View')"></div>
+                        <div class="additional-image" style="background-image: url('https://via.placeholder.com/200x300/f5f5f5/cccccc?text=Back+View')"></div>
+                        <div class="additional-image" style="background-image: url('https://via.placeholder.com/200x300/f5f5f5/cccccc?text=Side+View')"></div>
+                        <div class="additional-image" style="background-image: url('https://via.placeholder.com/200x300/f5f5f5/cccccc?text=Detail+View')"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // script.js
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('.carousel');
+            const productCards = document.querySelectorAll('.product-card');
+            const prevButton = document.querySelector('.prev');
+            const nextButton = document.querySelector('.next');
+            
+            let currentIndex = 0;
+            const cardWidth = productCards[0].offsetWidth + 30; // width + gap
+            const visibleCards = 3;
+            const totalCards = productCards.length;
+            
+            function updateCarousel() {
+                const maxOffset = (totalCards - visibleCards) * cardWidth;
+                let offset = -currentIndex * cardWidth;
+                
+                // If we're at the end, show the last set of cards
+                if (currentIndex > totalCards - visibleCards) {
+                    offset = -maxOffset;
+                }
+                
+                carousel.style.transform = `translateX(${offset}px)`;
+                
+                // Disable buttons when at the ends
+                prevButton.disabled = currentIndex === 0;
+                nextButton.disabled = currentIndex >= totalCards - visibleCards;
+            }
+            
+            prevButton.addEventListener('click', function() {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateCarousel();
+                }
+            });
+            
+            nextButton.addEventListener('click', function() {
+                if (currentIndex < totalCards - visibleCards) {
+                    currentIndex++;
+                    updateCarousel();
+                }
+            });
+            
+            // Initialize
+            updateCarousel();
+            
+            // Product hover effects
+            productCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                    this.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+                });
+            });
+          
+            
+            // Navigation links
+            const navLinks = document.querySelectorAll('.right li a');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Navigating to:', this.textContent);
+                });
+            });
+
+            // Product detail modal functionality
+            const modal = document.getElementById('productModal');
+            const closeModal = document.querySelector('.close-modal');
+            const detailTitle = document.getElementById('detailTitle');
+            const detailPrice = document.getElementById('detailPrice');
+            const detailKokoPrice = document.getElementById('detailKokoPrice');
+            const detailMainImage = document.getElementById('detailMainImage');
+            const additionalImages = document.querySelectorAll('.additional-image');
+
+            // Product data (in a real app, this would come from a database)
+            const products = {
+                1: {
+                    title: "SEAM DETAILED HIGH WAIST SHORT",
+                    price: "LKR 13,450.00",
+                    kokoPrice: "LKR 12,150.00 with offer",
+                    mainImage: "https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/776/686/new_large/Snapinsta.app_361917357_1281066052769741_7542260525457797854_n_1080.jpg?1697178222",
+                    images: [
+                        "https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/776/686/new_large/Snapinsta.app_361917357_1281066052769741_7542260525457797854_n_1080.jpg?1697178222",
+                        "https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/776/686/new_large/Snapinsta.app_361917357_1281066052769741_7542260525457797854_n_1080.jpg?1697178222",
+                        "https://via.placeholder.com/200x300/f5f5f5/cccccc?text=Side+View",
+                        "https://via.placeholder.com/200x300/f5f5f5/cccccc?text=Detail+View"
+                    ]
+                },
+                2: {
+                    title: "PIN TUCK DETAILED TIERED MINI DRESS",
+                    price: "LKR 27,450.00",
+                    kokoPrice: "LKR 22,483.33 with offer",
+                    mainImage: "https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/776/695/new_large/378195016_18381825262054431_6541196109615667217_n.jpg?1697178388",
+                    images: [
+                        "https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/776/695/new_large/378195016_18381825262054431_6541196109615667217_n.jpg?1697178388",
+                        "https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/776/695/new_large/378195016_18381825262054431_6541196109615667217_n.jpg?1697178388",
+                        "https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/776/695/new_large/378195016_18381825262054431_6541196109615667217_n.jpg?1697178388",
+                        "https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/776/695/new_large/378195016_18381825262054431_6541196109615667217_n.jpg?1697178388"
+                    ]
+                },
+                3: {
+                    title: "FRILL DETAILED BIAS MAXI DRESS",
+                    price: "LKR 47,450.00",
+                    kokoPrice: "LKR 42,483.33 with offer",
+                    mainImage: "https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/776/690/new_large/Snapinsta.app_343928323_627398675561852_8541137167038632642_n_1080.jpg?1697178162",
+                    images: [
+                        "https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/776/690/new_large/Snapinsta.app_343928323_627398675561852_8541137167038632642_n_1080.jpg?1697178162",
+                        "https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/776/690/new_large/Snapinsta.app_343928323_627398675561852_8541137167038632642_n_1080.jpg?1697178162",
+                        "https://via.placeholder.com/200x300/f5f5f5/cccccc?text=Side+View",
+                        "https://via.placeholder.com/200x300/f5f5f5/cccccc?text=Detail+View"
+                    ]
+                },
+                4: {
+                    title: "NEW ARRIVAL 1",
+                    price: "LKR 15,000.00",
+                    kokoPrice: "LKR 12,666.66 with offer",
+                    mainImage: "https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/659/659/new_large/Snapinsta.app_219514692_1032455963957427_283601405880123912_n_1080.jpg?1694610305",
+                    images: [
+                        "https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/659/659/new_large/Snapinsta.app_219514692_1032455963957427_283601405880123912_n_1080.jpg?1694610305",
+                        "https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/659/659/new_large/Snapinsta.app_219514692_1032455963957427_283601405880123912_n_1080.jpg?1694610305",
+                        "https://via.placeholder.com/200x300/f5f5f5/cccccc?text=Side+View",
+                        "https://via.placeholder.com/200x300/f5f5f5/cccccc?text=Detail+View"
+                    ]
+                },
+                5: {
+                    title: "NEW ARRIVAL 2",
+                    price: "LKR 16,000.00",
+                    kokoPrice: "LKR 12,000.00 with offer",
+                    mainImage: "https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/776/697/new_large/Snapinsta.app_371005329_324308993402979_2654081203253502701_n_1080.jpg?1697178410",
+                    images: [
+                        "https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/776/697/new_large/Snapinsta.app_371005329_324308993402979_2654081203253502701_n_1080.jpg?1697178410",
+                        "https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/007/776/697/new_large/Snapinsta.app_371005329_324308993402979_2654081203253502701_n_1080.jpg?1697178410",
+                        "https://via.placeholder.com/200x300/f5f5f5/cccccc?text=Side+View",
+                        "https://via.placeholder.com/200x300/f5f5f5/cccccc?text=Detail+View"
+                    ]
+                }
+            };
+
+            // Open modal when product is clicked
+            productCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-product-id');
+                    const product = products[productId];
+                    
+                    detailTitle.textContent = product.title;
+                    detailPrice.textContent = product.price;
+                    detailKokoPrice.textContent = product.kokoPrice;
+                    detailMainImage.style.backgroundImage = `url('${product.mainImage}')`;
+                    
+                    // Update additional images
+                    const additionalImagesContainer = document.querySelector('.additional-images');
+                    additionalImagesContainer.innerHTML = '';
+                    
+                    product.images.forEach((image, index) => {
+                        const imgDiv = document.createElement('div');
+                        imgDiv.className = `additional-image ${index === 0 ? 'active' : ''}`;
+                        imgDiv.style.backgroundImage = `url('${image}')`;
+                        imgDiv.addEventListener('click', function() {
+                            // Remove active class from all images
+                            document.querySelectorAll('.additional-image').forEach(img => {
+                                img.classList.remove('active');
+                            });
+                            // Add active class to clicked image
+                            this.classList.add('active');
+                            // Update main image
+                            detailMainImage.style.backgroundImage = this.style.backgroundImage;
+                        });
+                        additionalImagesContainer.appendChild(imgDiv);
+                    });
+                    
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+                });
+            });
+
+            // Close modal
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Re-enable scrolling
+            });
+
+            // Close modal when clicking outside the content
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Add to cart functionality
+            const addToCartBtn = document.querySelector('.add-to-cart');
+            addToCartBtn.addEventListener('click', function() {
+                const selectedSize = document.getElementById('size').value;
+                alert(`Added ${detailTitle.textContent} (Size: ${selectedSize}) to cart!`);
+            });
+        });
+    </script>
+</body>
+</html>

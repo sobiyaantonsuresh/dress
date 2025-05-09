@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color:#ff9a9e ;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 2rem;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    form label {
+      display: block;
+      margin-top: 20px;
+      font-weight: 600;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      resize: vertical;
+      font-size: 1rem;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 12px 20px;
+      background-color: #ff9a9e ;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff9a9e ;
+    }
+
+    .success {
+      color: rgb(201, 113, 142);
+      margin-top: 15px;
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      color: #fff;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>Contact Us</header>
+
+  <div class="container">
+    <form id="contactForm">
+      <label for="name">Name *</label>
+      <input type="text" id="name" required />
+
+      <label for="email">Email *</label>
+      <input type="email" id="email" required />
+
+      <label for="message">Message *</label>
+      <textarea id="message" rows="5" required></textarea>
+
+      <button type="submit">Send Message</button>
+      <div class="success" id="successMessage">Thank you! Your message has been sent.</div>
+    </form>
+  </div>
+
+  <footer>&copy; 2025 Our Company. All Rights Reserved.</footer>
+
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+      const successMessage = document.getElementById("successMessage");
+
+      if (name === "" || email === "" || message === "") {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      // Here you can add code to actually send data to a server or API.
+
+      successMessage.style.display = "block";
+
+      // Optional: Reset form
+      this.reset();
+    });
+  </script>
+
+</body>
+</html>

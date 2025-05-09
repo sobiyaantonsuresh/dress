@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Us</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #e8959c;
+      color: white;
+      padding: 20px 40px;
+      text-align: center;
+      font-size: 2rem;
+    }
+
+    .container {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .video-section {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    video {
+      width: 100%;
+      max-width: 800px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .about-content {
+      margin-top: 30px;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      color: #fff;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>About Us</header>
+
+  <div class="container">
+    <div class="video-section">
+      <video controls>
+        <source src="about.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="about-content">
+      <h2>Welcome to Our Company</h2>
+      <p>
+        We are dedicated to delivering the best service in the industry. With a passionate team, modern technology, and a commitment to excellence, we ensure customer satisfaction is our top priority.
+      </p>
+      <p>
+        Our journey started with a mission to innovate and grow with our community. Today, we proudly serve thousands of clients across multiple regions.
+      </p>
+      <p>
+        Watch the video above to learn more about our values, team, and what makes us unique!
+      </p>
+    </div>
+  </div>
+
+  <footer>&copy; 2025 Our Company. All Rights Reserved.</footer>
+
+  <script>
+    // Optional: Simple scroll animation
+    window.addEventListener('scroll', () => {
+      const about = document.querySelector('.about-content');
+      const position = about.getBoundingClientRect().top;
+      const screenPosition = window.innerHeight / 1.2;
+
+      if (position < screenPosition) {
+        about.style.animation = 'fadeIn 1.5s ease-in-out forwards';
+      }
+    });
+  </script>
+
+</body>
+</html>

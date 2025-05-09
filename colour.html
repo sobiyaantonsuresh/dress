@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Color Selection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin: 20px 0 10px;
+            color: #555;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin: 15px 0;
+            color: #666;
+        }
+        
+        .color-options, .size-options, .offers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .color-option {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #ddd;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-option.selected {
+            border: 4px solid #333;
+            transform: scale(1.1);
+        }
+        
+        .floral { background: linear-gradient(45deg, #ff9a9e, #fad0c4); }
+        .green { background-color: #a8e6cf; }
+        .orange { background-color: #ffd3b6; }
+        .blue { background-color: #dcedc1; }
+        .red { background-color: #ff6b6b; }
+        .purple { background-color: #b8b8ff; }
+        .yellow { background-color: #ffff99; }
+        .pink { background-color: #ffb7b7; }
+        .teal { background-color: #a2d7d8; }
+        .navy { background-color: #6b7b8e; }
+        
+        .size-option {
+            padding: 10px 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .size-option:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .size-option.selected {
+            background-color: #333;
+            color: white;
+            border-color: #333;
+        }
+        
+        .offer-item {
+            padding: 10px;
+            background-color: #fff;
+            border-left: 4px solid #ff6b6b;
+            margin-bottom: 10px;
+        }
+        
+        .search-bar {
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .search-bar input {
+            padding: 12px 20px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+        }
+        
+        .search-bar button {
+            padding: 12px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        
+        .search-results {
+            margin: 20px auto;
+            max-width: 800px;
+            display: none;
+        }
+        
+        .dress-item {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .dress-image {
+            width: 100px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+        
+        .dress-color {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 20px;
+            border: 1px solid #ddd;
+        }
+        
+        .dress-info {
+            flex-grow: 1;
+        }
+        
+        .dress-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .dress-details {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .privacy {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #777;
+            text-align: center;
+        }
+        
+        .privacy a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Customize</h1>
+        <h2>Search for a product</h2>
+    </header>
+    
+    <main>
+        <h3>BOOK APPOINTMENT</h3>
+        
+        <hr>
+        
+        <h3>COLOR</h3>
+        <div class="color-options">
+            <div class="color-option floral" title="Floral" data-color="floral"></div>
+            <div class="color-option green" title="Green" data-color="green"></div>
+            <div class="color-option orange" title="Orange" data-color="orange"></div>
+            <div class="color-option blue" title="Blue" data-color="blue"></div>
+            <div class="color-option red" title="Red" data-color="red"></div>
+            <div class="color-option purple" title="Purple" data-color="purple"></div>
+            <div class="color-option yellow" title="Yellow" data-color="yellow"></div>
+            <div class="color-option pink" title="Pink" data-color="pink"></div>
+            <div class="color-option teal" title="Teal" data-color="teal"></div>
+            <div class="color-option navy" title="Navy" data-color="navy"></div>
+        </div>
+        
+        <h3>SIZE-AUTRED</h3>
+        <div class="size-options">
+            <div class="size-option" data-size="32">32</div>
+            <div class="size-option" data-size="26">26</div>
+            <div class="size-option" data-size="28">28</div>
+            <div class="size-option" data-size="30">30</div>
+            <div class="size-option" data-size="34">34</div>
+        </div>
+        
+        <h3>EXCLUSIVE OFFERS</h3>
+        <div class="offers">
+            <div class="offer-item">New Autred Collection - 20% Off</div>
+            <div class="offer-item">Summer Special - Free Shipping</div>
+            <div class="offer-item">Limited Edition Colors - Only 10 Left</div>
+        </div>
+        
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Type here to search">
+            <button onclick="performSearch()">Search</button>
+        </div>
+        
+        <div id="searchResults" class="search-results">
+            <h3>Matching Dresses</h3>
+            <div id="resultsContainer"></div>
+        </div>
+        
+        <div id="noResults" class="no-results">
+            <p>No dresses found matching your criteria. Please try different options.</p>
+        </div>
+    </main>
+    
+    <footer class="privacy">
+        <p>Our audience; and collect analytical data about website use. To edit your cookie preferences, use the options below. For more information, please visit our <a href="#">Privacy Policy</a>. By using this website, you accept</p>
+        <p><a href="https://www.dawidsintial.com/product/crepe-sculpted-neckline-ahealth-dress-sds742004?defining_color=9513">View Dress Example</a></p>
+    </footer>
+
+    <script>
+        // Sample dress data with image URLs
+        const dresses = [
+        { 
+                id: 1, 
+                title: "Floral Summer Dress", 
+                color: "floral", 
+                size: "32", 
+                description: "Lightweight floral dress perfect for summer occasions",
+                image: "https://weddingdressesguide.com/wp-content/uploads/2019/04/floral-wedding-dresses-a-line-low-back-with-train-embroidered-tatyanacvetkova-512x1024.jpg"
+            },
+            { 
+                id: 2, 
+                title: "Green Evening Gown", 
+                color: "green", 
+                size: "28", 
+                description: "Elegant green gown for formal events",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU-Wv4gmFvzzCf2hT_W5d2kYCG2l_OHnMevw&s"
+            },
+            { 
+                id: 3, 
+                title: "Orange Casual Dress", 
+                color: "orange", 
+                size: "26", 
+                description: "Comfortable orange dress for everyday wear",
+                image: "https://i.pinimg.com/736x/6e/cf/26/6ecf26f3acf4b5c58654d0909911a53f.jpg"
+            },
+            { 
+                id: 4, 
+                title: "Blue Maxi Dress", 
+                color: "blue", 
+                size: "30", 
+                description: "Flowy blue maxi dress with elegant details",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZdsIjyaYf5ogjc0W50s2A4b2y6-Hyd-LgAA&s"
+            },
+            { 
+                id: 5, 
+                title: "Red Cocktail Dress", 
+                color: "red", 
+                size: "32", 
+                description: "Stylish red dress for parties and events",
+                image: "https://i.pinimg.com/736x/42/aa/d7/42aad71d64fc31d0f4faadd2504b7924.jpg"
+            },
+            { 
+                id: 6, 
+                title: "Purple Wrap Dress", 
+                color: "purple", 
+                size: "28", 
+                description: "Flattering purple wrap dress for all occasions",
+                image: "https://img.davidsbridal.com/is/image/DavidsBridalInc/Set-D40WBM4639V1-11724092-Blue%20Multi?wid=384&fit=constrain,1&resmode=sharp2&op_usm=2.5,0.3,4&fmt=webp&qlt=75"
+            },
+            { 
+                id: 7, 
+                title: "Yellow Sundress", 
+                color: "yellow", 
+                size: "26", 
+                description: "Bright yellow sundress with adjustable straps",
+                image: "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            },
+            { 
+                id: 8, 
+                title: "Pink Party Dress", 
+                color: "pink", 
+                size: "34", 
+                description: "Sparkly pink dress for special occasions",
+                image: "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+            }
+        ];
+
+        let selectedColor = null;
+        let selectedSize = null;
+
+        // Set up color selection
+        document.querySelectorAll('.color-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected class from all colors
+                document.querySelectorAll('.color-option').forEach(el => {
+                    el.classList.remove('selected');
+                });
+                
+                // Add selected class to clicked color
+                this.classList.add('selected');
+                selectedColor = this.getAttribute('data-color');
+                
+                // If we already have a size selected, perform search
+                if (selectedSize) {
+                    performSearch();
+                }
+            });
+        });
+
+        // Set up size selection
+        document.querySelectorAll('.size-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selected class from all sizes
+                document.querySelectorAll('.size-option').forEach(el => {
+                    el.classList.remove('selected');
+                });
+                
+                // Add selected class to clicked size
+                this.classList.add('selected');
+                selectedSize = this.getAttribute('data-size');
+                
+                // If we already have a color selected, perform search
+                if (selectedColor) {
+                    performSearch();
+                }
+            });
+        });
+
+        // Search function
+        function performSearch() {
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            
+            // Filter dresses based on selections
+            let filteredDresses = dresses;
+            
+            if (selectedColor) {
+                filteredDresses = filteredDresses.filter(dress => dress.color === selectedColor);
+            }
+            
+            if (selectedSize) {
+                filteredDresses = filteredDresses.filter(dress => dress.size === selectedSize);
+            }
+            
+            if (searchText) {
+                filteredDresses = filteredDresses.filter(dress => 
+                    dress.title.toLowerCase().includes(searchText) || 
+                    dress.description.toLowerCase().includes(searchText)
+                );
+            }
+            
+            // Display results
+            displayResults(filteredDresses);
+        }
+
+        // Display search results
+        function displayResults(results) {
+            const resultsContainer = document.getElementById('resultsContainer');
+            const searchResults = document.getElementById('searchResults');
+            const noResults = document.getElementById('noResults');
+            
+            resultsContainer.innerHTML = '';
+            
+            if (results.length === 0) {
+                searchResults.style.display = 'none';
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+                searchResults.style.display = 'block';
+                
+                results.forEach(dress => {
+                    const dressElement = document.createElement('div');
+                    dressElement.className = 'dress-item';
+                    
+                    const colorClass = dress.color;
+                    
+                    dressElement.innerHTML = `
+                        <img src="${dress.image}" alt="${dress.title}" class="dress-image">
+                        <div class="dress-color ${colorClass}"></div>
+                        <div class="dress-info">
+                            <div class="dress-title">${dress.title} (Size ${dress.size})</div>
+                            <div class="dress-details">${dress.description}</div>
+                        </div>
+                    `;
+                    
+                    resultsContainer.appendChild(dressElement);
+                });
+            }
+        }
+
+        // Allow search on Enter key
+        document.getElementById('searchInput').addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        });
+    </script>
+</body>
+</html>
